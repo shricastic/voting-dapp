@@ -8,8 +8,9 @@ const IDL = require('../target/idl/votingdapp.json')
 const votingdappAddress = new PublicKey("CstCjwHJP5GtAEAoFVLR4wAnHes8DyLHPpzkKUgwQtUV")
 
 describe('votingdapp', () => {
-  let context, provider:any, votingdappProgram = new Program<Votingdapp>(IDL, provider);
-
+  let context, provider:any;
+  anchor.setProvider(anchor.AnchorProvider.env());
+  let votingdappProgram = anchor.workspace.votingdapp as Program<Votingdapp>;
   beforeAll(async() => {
     context = await startAnchor("", [{name: "votingdapp", programId: votingdappAddress}], []); 
     provider = new BankrunProvider(context);
